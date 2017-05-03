@@ -1,10 +1,17 @@
 #!/bin/bash
-set -x
 
-LOG_DIR=/var/log/one
-LOG_NAME='[0-9]*.log'
-SERVER=localhost
-NEW_LOG_DIR=/var/log/one2
+LOG_DIR="$(dirname "$1")"
+LOG_NAME="$(basename "$1")"
+SERVER="$(echo $2 | grep -oP "^.*(?=:)")"
+NEW_LOG_DIR="$(echo $2 | grep -oP "[^:]*$")"
+
+SERVER="${SERVER:-localhost}"
+NEW_LOG_DIR=${NEW_LOG_DIR%/}
+
+if [ -z "$NEW_LOG_DIR" ] || [ ! -z "$3" ] || [ -f "$1" ]; then
+    echo "USAGE: $(basename "$0") '/path/to/log/[0-9]*.log' 'logserver:/path/to/log'"
+    exit 1
+fi
 
 cd "$LOG_DIR"
 
