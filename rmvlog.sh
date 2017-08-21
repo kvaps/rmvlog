@@ -9,7 +9,7 @@ TIMEOUT=${3:-5}
 SERVER="${SERVER:-localhost}"
 NEW_LOG_DIR=${NEW_LOG_DIR%/}
 
-if [ -z "$NEW_LOG_DIR" ] || [ ! -z "$3" ] || [ -f "$1" ]; then
+if [ -z "$NEW_LOG_DIR" ] || [ ! -z "$4" ] || [ -f "$1" ]; then
     echo "USAGE: $(basename "$0") '/path/to/log/[0-9]*.log' 'logserver:/path/to/log'"
     exit 1
 fi

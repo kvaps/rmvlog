@@ -1,0 +1,10 @@
+[Unit]
+Description=Safe redirect log files from one server to another one
+
+[Service]
+ExecStart=/bin/rmvlog.sh '/var/log/one/[0-9]*.log' 'opennebula-sunstone:/var/log/one' 5
+User=oneadmin
+Group=oneadmin
+
+[Install]
+WantedBy=multi-user.target
